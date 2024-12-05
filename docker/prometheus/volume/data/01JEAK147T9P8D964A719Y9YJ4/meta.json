@@ -1,0 +1,17 @@
+{
+	"ulid": "01JEAK147T9P8D964A719Y9YJ4",
+	"minTime": 1733364008178,
+	"maxTime": 1733371200000,
+	"stats": {
+		"numSamples": 3600,
+		"numSeries": 5,
+		"numChunks": 31
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01JEAK147T9P8D964A719Y9YJ4"
+		]
+	},
+	"version": 1
+}

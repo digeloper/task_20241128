@@ -1,0 +1,8 @@
+include:
+  - docker/db.yml
+  - docker/kafka.yml
+  - docker/monitoring.yml
+  - docker/redis.yml
+networks:
+  network-homework:
+    driver: bridge

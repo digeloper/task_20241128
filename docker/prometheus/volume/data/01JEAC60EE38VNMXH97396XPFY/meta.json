@@ -1,0 +1,17 @@
+{
+	"ulid": "01JEAC60EE38VNMXH97396XPFY",
+	"minTime": 1733356824763,
+	"maxTime": 1733364000000,
+	"stats": {
+		"numSamples": 3575,
+		"numSeries": 5,
+		"numChunks": 27
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01JEAC60EE38VNMXH97396XPFY"
+		]
+	},
+	"version": 1
+}

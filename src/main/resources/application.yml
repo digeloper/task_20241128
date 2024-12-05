@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: homework
+  config:
+    import:
+      - db.yml
+      - logback.yml
+      - swagger.yml
+      - kafka.yml
+      - redis.yml
+  web:
+    resources:
+      add-mappings: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
+
