@@ -111,13 +111,13 @@ curl --location --request GET 'localhost:8080/api/employee?page=0&pageSize=10' \
     "pageSize": 2,
     "employees":[
         {
-            "name": "clo@clovf.com",
+            "name": "aaa@xxx.com",
             "email": "김철수",
             "tel": "01075312468",
             "joined":[2018, 3, 7]
         },
         {
-            "name": "matilda@clovf.com",
+            "name": "matilda@xxx.com",
             "email": "박영희",
             "tel": "01087654321",
             "joined":[2021, 4, 28]
@@ -135,8 +135,8 @@ curl --location --request GET 'localhost:8080/api/employee/김철수' \
 ```
 ```json
 {
-    "name": "김클로",
-    "email": "clo@clovf.com",
+    "name": "홍길동",
+    "email": "aaa@xxx.com",
     "tel": "010-7531-2468",
     "joined":[2018, 3, 7]
 }
@@ -152,19 +152,19 @@ POST /api/employee
 [
     {
         "name": "김철수",
-        "email": "clo@clovf.com",
+        "email": "aaa@xxx.com",
         "tel": "01075312468",
         "joined":[2018, 3, 7]
     },
     {
         "name": "박영희",
-        "email": "matilda@clovf.com",
+        "email": "matilda@xxx.com",
         "tel": "01087654321",
         "joined":[2021, 4, 28]
     },
     {
         "name": "홍길동",
-        "email": "kildong.hong@clovf.com",
+        "email": "kildong.hong@xxx.com",
         "tel": "01012345678",
         "joined":[2015, 8, 15]
     }
@@ -178,20 +178,20 @@ curl --location --request POST 'localhost:8080/api/employee' \
 --data-raw '
   [
       {
-        "name": "김클로",
-        "email": "clo@clovf.com",
+        "name": "박철수",
+        "email": "clo@xxx.com",
         "tel": "010-7531-2468",
         "joined": "2018-03-07"
       },
       {
-        "name": "박마블",
-        "email": "md@clovf.com",
+        "name": "김이삭",
+        "email": "md@xxx.com",
         "tel": "010-3535-7979",
         "joined": "2013-07-01"
       },
       {
-        "name": "홍커넥",
-        "email": "connect@clovf.com",
+        "name": "사무시",
+        "email": "connect@xxx.com",
         "tel": "010-8531-2468",
         "joined": "2019-12-05"
       }
@@ -200,20 +200,20 @@ curl --location --request POST 'localhost:8080/api/employee' \
 ```json
 [
     {
-        "name": "김클로",
-        "email": "clo@clovf.com",
+        "name": "박철수",
+        "email": "clo@xxx.com",
         "tel": "010-7531-2468",
         "joined":[2018, 3, 7]
     },
     {
-        "name": "박마블",
-        "email": "md@clovf.com",
+        "name": "김이삭",
+        "email": "md@xxx.com",
         "tel": "010-3535-7979",
         "joined":[2013, 7, 1]
     },
     {
-        "name": "홍커넥",
-        "email": "connect@clovf.com",
+        "name": "사무시",
+        "email": "connect@xxx.com",
         "tel": "010-8531-2468",
         "joined":[2019, 12, 5]
     }
