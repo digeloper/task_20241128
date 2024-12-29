@@ -93,6 +93,10 @@ k6 run ./k6/employee-test.js
 ```
 <img width="868" alt="Screenshot 2024-12-05 at 4 20 04 PM" src="https://github.com/user-attachments/assets/462ea4b7-1982-47d5-b6c7-78aa47dde179">
 
+## 모니터링
+Prometheus를 통해 정보를 수집하고 grafana를 통해 시각화 함
+<img width="1368" alt="Screenshot 2024-12-03 at 10 35 19 PM" src="https://github.com/user-attachments/assets/d4aaccc7-67bc-4c7b-9769-d5dc1601b992" />
+
 # 구현 내용
 * * *
 ## 직원 연락처 관리
