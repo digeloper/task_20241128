@@ -44,7 +44,7 @@ docker-compose -f ./docker-compose.yml up -d
 - kafka : http://localhost:8989
 - grafana : http://localhost:3000 admin/admin
 - prometheus : http://localhost:9090
-- mongoDB : http://localhost:8081
+- mongoDB : http://localhost:8081 admi/admin
 - swagger: http://localhost:8080/swagger-ui.html
 
 ### redis 동작 확인
