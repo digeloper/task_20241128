@@ -100,9 +100,9 @@ k6 run ./k6/employee-test.js
 GET /api/employee?page={page}&pageSize={pageSize}
 - page, pageSize 정보를 통해 페이징이 가능해야 합니다.
 ```bash
-curl --location --request GET 'localhost:8080/api/employee?page=0&pageSize=10' \
---header 'Content-Type: application/json' \
---data-raw ''
+curl -X GET \
+-H 'Content-Type: application/json' \
+'localhost:8080/api/employee?page=0&pageSize=10'
 ```
 ```json
 {
@@ -129,9 +129,9 @@ curl --location --request GET 'localhost:8080/api/employee?page=0&pageSize=10' \
 ### 직원의 기본 연락정보 요청
 GET /api/employee/{name}
 ```bash
-curl --location --request GET 'localhost:8080/api/employee/김철수' \
---header 'Content-Type: application/json' \
---data-raw ''
+curl -X GET \
+-H 'Content-Type: application/json' \
+'localhost:8080/api/employee/김철수'
 ```
 ```json
 {
@@ -144,10 +144,13 @@ curl --location --request GET 'localhost:8080/api/employee/김철수' \
 
 ### 직원 정보 추가
 POST /api/employee
-- CSV 형식 (cURL을 통해서 실패하여 다른 툴을 통해 테스트 하였습니다.)
-
-  <img width="819" alt="Screenshot 2024-12-05 at 5 27 41 PM" src="https://github.com/user-attachments/assets/c9291bf7-32e3-4476-86a2-98ff1f694f14">
-
+- CSV 형식
+```bash
+curl -X POST \
+-H 'Content-Type: text/csv' \
+--data-binary @employees.csv \
+'localhost:8080/api/employee'
+```
 ```json
 [
     {
@@ -173,9 +176,9 @@ POST /api/employee
 
 - Json 형식
 ```bash
-curl --location --request POST 'localhost:8080/api/employee' \
---header 'Content-Type: application/json' \
---data-raw '
+curl -X POST \
+-H 'Content-Type: application/json' \
+--data-binary '
   [
       {
         "name": "김클로",
@@ -195,7 +198,8 @@ curl --location --request POST 'localhost:8080/api/employee' \
         "tel": "010-8531-2468",
         "joined": "2019-12-05"
       }
-]'
+]' \
+'localhost:8080/api/employee'
 ```
 ```json
 [
@@ -225,9 +229,9 @@ POST /api/test/log/{level}
 - 로그를 인위적으로 발생시키기 위한 테스트 API
 - level은 ERROR, WARN, INFO, DEBUG, TRACE
 ```bash
-curl --location --request POST 'localhost:8080/api/test/log/ERROR' \
---header 'Content-Type: application/json' \
---data-raw ''
+curl -H POST \
+-H 'Content-Type: application/json' \
+'localhost:8080/api/test/log/ERROR'
 ```
 
 ### 에러 응답
