@@ -17,6 +17,5 @@ class KafkaProducer(
 
     companion object {
         const val TOPIC_ADDED: String = "added"
-        const val GROUP_EMPLOYEE: String = "employee"
     }
 }
