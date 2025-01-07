@@ -93,6 +93,10 @@ k6 run ./k6/employee-test.js
 ```
 <img width="868" alt="Screenshot 2024-12-05 at 4 20 04 PM" src="https://github.com/user-attachments/assets/462ea4b7-1982-47d5-b6c7-78aa47dde179">
 
+## 모니터링
+Prometheus를 통해 정보를 수집하고 grafana를 통해 시각화 함
+<img width="1368" alt="Screenshot 2024-12-03 at 10 35 19 PM" src="https://github.com/user-attachments/assets/d4aaccc7-67bc-4c7b-9769-d5dc1601b992" />
+
 # 구현 내용
 * * *
 ## 직원 연락처 관리
@@ -111,13 +115,13 @@ curl -X GET \
     "pageSize": 2,
     "employees":[
         {
-            "name": "clo@clovf.com",
+            "name": "aaa@xxx.com",
             "email": "김철수",
             "tel": "01075312468",
             "joined":[2018, 3, 7]
         },
         {
-            "name": "matilda@clovf.com",
+            "name": "matilda@xxx.com",
             "email": "박영희",
             "tel": "01087654321",
             "joined":[2021, 4, 28]
@@ -135,8 +139,8 @@ curl -X GET \
 ```
 ```json
 {
-    "name": "김클로",
-    "email": "clo@clovf.com",
+    "name": "홍길동",
+    "email": "aaa@xxx.com",
     "tel": "010-7531-2468",
     "joined":[2018, 3, 7]
 }
@@ -155,19 +159,19 @@ curl -X POST \
 [
     {
         "name": "김철수",
-        "email": "clo@clovf.com",
+        "email": "aaa@xxx.com",
         "tel": "01075312468",
         "joined":[2018, 3, 7]
     },
     {
         "name": "박영희",
-        "email": "matilda@clovf.com",
+        "email": "matilda@xxx.com",
         "tel": "01087654321",
         "joined":[2021, 4, 28]
     },
     {
         "name": "홍길동",
-        "email": "kildong.hong@clovf.com",
+        "email": "kildong.hong@xxx.com",
         "tel": "01012345678",
         "joined":[2015, 8, 15]
     }
@@ -181,20 +185,20 @@ curl -X POST \
 --data-binary '
   [
       {
-        "name": "김클로",
-        "email": "clo@clovf.com",
+        "name": "박철수",
+        "email": "clo@xxx.com",
         "tel": "010-7531-2468",
         "joined": "2018-03-07"
       },
       {
-        "name": "박마블",
-        "email": "md@clovf.com",
+        "name": "김이삭",
+        "email": "md@xxx.com",
         "tel": "010-3535-7979",
         "joined": "2013-07-01"
       },
       {
-        "name": "홍커넥",
-        "email": "connect@clovf.com",
+        "name": "사무시",
+        "email": "connect@xxx.com",
         "tel": "010-8531-2468",
         "joined": "2019-12-05"
       }
@@ -204,20 +208,20 @@ curl -X POST \
 ```json
 [
     {
-        "name": "김클로",
-        "email": "clo@clovf.com",
+        "name": "박철수",
+        "email": "clo@xxx.com",
         "tel": "010-7531-2468",
         "joined":[2018, 3, 7]
     },
     {
-        "name": "박마블",
-        "email": "md@clovf.com",
+        "name": "김이삭",
+        "email": "md@xxx.com",
         "tel": "010-3535-7979",
         "joined":[2013, 7, 1]
     },
     {
-        "name": "홍커넥",
-        "email": "connect@clovf.com",
+        "name": "사무시",
+        "email": "connect@xxx.com",
         "tel": "010-8531-2468",
         "joined":[2019, 12, 5]
     }
