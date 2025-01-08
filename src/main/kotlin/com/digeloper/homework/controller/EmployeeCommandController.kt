@@ -1,10 +1,11 @@
 package com.digeloper.homework.controller
 
 import com.digeloper.homework.exception.DigeloperException
+import com.digeloper.homework.helper.CSVHelper.Companion.csvDateToLocalDate
+import com.digeloper.homework.helper.CSVHelper.Companion.csvToObject
 import com.digeloper.homework.mapper.EmployeeMapper
 import com.digeloper.homework.model.dto.EmployeeDto
 import com.digeloper.homework.service.EmployeeService
-import com.digeloper.homework.helper.CSVHelper.Companion.csvToEmployeesDto
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -27,7 +28,14 @@ class EmployeeCommandController(
     fun saveCSVEmployees(
         @RequestBody employeesCSV: Flux<String>
     ): ResponseEntity<Mono<MutableList<EmployeeDto>>> {
-        val employeesDto = employeesCSV.csvToEmployeesDto()
+        val employeesDto = employeesCSV.csvToObject { columns ->
+            EmployeeDto(
+                name = columns[COLUMN_NAME],
+                email = columns[COLUMN_EMAIL],
+                tel = columns[COLUMN_TEL],
+                joined = columns[COLUMN_JOINED].csvDateToLocalDate()
+            )
+        }
         val savedEmployeesDto = saveEmployees(employeesDto)
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEmployeesDto)
     }
@@ -45,5 +53,12 @@ class EmployeeCommandController(
         return employeeService.saveEmployees(employees)
             .map { employeeMapper.toDto(it)!! }
             .collectList()
+    }
+
+    companion object {
+        private const val COLUMN_NAME = 0
+        private const val COLUMN_EMAIL = 1
+        private const val COLUMN_TEL = 2
+        private const val COLUMN_JOINED = 3
     }
 }

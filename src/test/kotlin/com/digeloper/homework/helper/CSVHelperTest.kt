@@ -1,10 +1,11 @@
 package com.digeloper.homework.helper
 
 import com.digeloper.homework.constants.DigeloperError
-import com.digeloper.homework.helper.CSVHelper.Companion.csvToEmployeesDto
+import com.digeloper.homework.helper.CSVHelper.Companion.csvDateToLocalDate
+import com.digeloper.homework.helper.CSVHelper.Companion.csvToObject
+import com.digeloper.homework.model.dto.EmployeeDto
 import com.digeloper.homework.model.dto.EmployeeDtoTest.Companion.EMPLOYEE_DTO_CHUL
 import com.digeloper.homework.model.dto.EmployeeDtoTest.Companion.EMPLOYEE_DTO_YOUNG
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import reactor.core.publisher.Flux
 import reactor.test.StepVerifier
@@ -17,7 +18,16 @@ class CSVHelperTest : BehaviorSpec({
                 "김영희, young@degeloper.com, 010-3456-7890, 2024.01.01"
             )
 
-            val result = StepVerifier.create(csvData.csvToEmployeesDto().collectList())
+            val employeesDto = csvData.csvToObject { columns ->
+                EmployeeDto(
+                    name = columns[0],
+                    email = columns[1],
+                    tel = columns[2],
+                    joined = columns[3].csvDateToLocalDate()
+                )
+            }
+
+            val result = StepVerifier.create(employeesDto.collectList())
             then("Flux<EmployeeDto>로 변환되어야 한다") {
                 result.expectSubscription()
                     .expectNext(listOf(EMPLOYEE_DTO_CHUL, EMPLOYEE_DTO_YOUNG))
@@ -32,7 +42,16 @@ class CSVHelperTest : BehaviorSpec({
                 "김영희, young@degeloper.com, , 010-3456-7890, 2024.01.01"   // 컬럼값이 많은경우
             )
 
-            val result = StepVerifier.create(invalidCsvData.csvToEmployeesDto().collectList())
+            val invalidEmployeesDto = invalidCsvData.csvToObject { columns ->
+                EmployeeDto(
+                    name = columns[0],
+                    email = columns[1],
+                    tel = columns[2],
+                    joined = columns[3].csvDateToLocalDate()
+                )
+            }
+
+            val result = StepVerifier.create(invalidEmployeesDto.collectList())
             Then("DigeloperException 이 발생해야 한다") {
                 result.expectSubscription()
                     .verifyErrorMatches { it.message.equals(DigeloperError.INVALID_FORMAT_EMPLOYEE_CVS.desc) }
@@ -44,10 +63,19 @@ class CSVHelperTest : BehaviorSpec({
                 "홍길동, hong@degeloper.com, 010-1234-5678, 202401AA"
             )
 
-            Then("DateTimeParseException이 발생해야 한다") {
-                shouldThrow<java.time.format.DateTimeParseException> {
-                    invalidDateCsvData.csvToEmployeesDto().collectList().block()
-                }
+            val invalidEmployeesDto = invalidDateCsvData.csvToObject { columns ->
+                EmployeeDto(
+                    name = columns[0],
+                    email = columns[1],
+                    tel = columns[2],
+                    joined = columns[3].csvDateToLocalDate()
+                )
+            }
+
+            val result = StepVerifier.create(invalidEmployeesDto.collectList())
+            Then("DigeloperException 이 발생해야 한다") {
+                result.expectSubscription()
+                    .verifyErrorMatches { it.message.equals(DigeloperError.INVALID_FORMAT_EMPLOYEE_CVS.desc) }
             }
         }
     }
